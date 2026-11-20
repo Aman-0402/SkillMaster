@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (how it works scroll redesign)
+- How it works redesigned as scroll-driven: sticky left panel with big step counter that swaps per step, spring-filled progress line with dots, active step highlighted while others dim, hover nudge (`src/components/how-it-works.tsx`)
+
 ### 2026-11-20 (how it works)
 - Added black "From sign-up to first class" section after Featured courses: 4 numbered step cards (account, pick course, batch + UPI pay, start learning) (`src/components/how-it-works.tsx`, `src/App.tsx`)
 
