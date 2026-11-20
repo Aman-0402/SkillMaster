@@ -27,9 +27,9 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(rgb(15_23_42/0.07)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
       />
-      <div aria-hidden className="absolute -right-24 -top-24 -z-10 size-[28rem] rounded-full bg-brand-100 blur-3xl" />
+      <div aria-hidden className="absolute -right-24 -top-40 -z-10 size-[28rem] rounded-full bg-brand-100 blur-3xl" />
 
-      <div className="mx-auto grid w-full max-w-site items-center gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 lg:px-8 lg:py-28 2xl:px-12">
+      <div className="mx-auto grid w-full max-w-site items-center gap-12 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 lg:px-8 lg:py-12 2xl:px-12">
         <div>
           <motion.p
             {...rise(0)}

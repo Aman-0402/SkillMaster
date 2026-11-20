@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero spacing)
+- Cut hero top/bottom padding (lg: 7rem to 3rem, mobile 4rem to 2rem) and moved background glow up (`src/components/hero.tsx`)
+
 ### 2026-11-20 (hero)
 - Added hero section: headline "Learn something new this week.", subtext, CTAs Browse courses (`/courses`) and Join now (`/join`), subject chips, decorative "Your week" card. Replaced placeholder page content (`src/components/hero.tsx`, `src/App.tsx`)
 
