@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (subjects bigger type)
+- Subjects cards: bigger fonts (title up to 72px, desc 24px, larger tags/count), taller cards, visible index number top-left replaces ghost number, arrow button larger and no longer overlaps (`src/components/subjects.tsx`)
+
 ### 2026-11-20 (subjects icons removed)
 - Removed icon tiles from Subjects cards (`src/components/subjects.tsx`)
 
