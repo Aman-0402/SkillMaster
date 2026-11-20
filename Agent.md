@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (blog dropdown)
+- Blog is now a dropdown: Latest articles (`/blog`), Tutorials (`/blog/tutorials`), Career guides (`/blog/career-guides`), News (`/blog/news`), with promo card (`src/components/navbar.tsx`)
+
 ### 2026-11-20 (instructors dropdown)
 - Instructors is now a dropdown: All instructors (`/instructors`), Become an instructor (`/instructors/join`), Top rated (`/instructors/top`), with promo card (`src/components/navbar.tsx`)
 

@@ -13,14 +13,18 @@ import {
   BarChart3,
   Brain,
   Briefcase,
+  Compass,
   Building2,
   ChevronDown,
   HelpCircle,
   LogIn,
+  Megaphone,
   Menu,
   Monitor,
+  Newspaper,
   Server,
   Star,
+  Terminal,
   UserPlus,
   Users,
   X,
@@ -51,6 +55,16 @@ const GROUPS: NavGroup[] = [
     ],
   },
   {
+    key: "blog",
+    label: "Blog",
+    items: [
+      { title: "Latest articles", desc: "Fresh reads from our team", to: "/blog", Icon: Newspaper },
+      { title: "Tutorials", desc: "Step-by-step guides to build skills", to: "/blog/tutorials", Icon: Terminal },
+      { title: "Career guides", desc: "Roadmaps, resumes and interview tips", to: "/blog/career-guides", Icon: Compass },
+      { title: "News", desc: "Updates and announcements", to: "/blog/news", Icon: Megaphone },
+    ],
+  },
+  {
     key: "about",
     label: "About",
     items: [
@@ -66,7 +80,7 @@ type TopEntry = { type: "link"; label: string; to: string } | { type: "group"; k
 const TOP: TopEntry[] = [
   { type: "group", key: "courses" },
   { type: "group", key: "instructors" },
-  { type: "link", label: "Blog", to: "/blog" },
+  { type: "group", key: "blog" },
   { type: "group", key: "about" },
   { type: "link", label: "Contact", to: "/contact" },
 ];
@@ -85,6 +99,13 @@ const PROMO: Record<string, { eyebrow: string; title: string; text: string; to: 
     text: "Meet our instructors, or apply to join them.",
     to: "/instructors",
     cta: "See instructors",
+  },
+  blog: {
+    eyebrow: "From the blog",
+    title: "Guides on skills, careers and tech",
+    text: "Practical reads for learners at every level.",
+    to: "/blog",
+    cta: "Open the blog",
   },
   about: {
     eyebrow: "Who we are",
