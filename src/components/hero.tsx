@@ -29,30 +29,22 @@ export default function Hero() {
       />
       <div aria-hidden className="absolute -right-24 -top-40 -z-10 size-[28rem] rounded-full bg-brand-100 blur-3xl" />
 
-      <div className="mx-auto grid w-full max-w-site items-center gap-12 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 lg:px-8 lg:py-12 2xl:px-12">
+      <div className="mx-auto grid w-full max-w-site items-center gap-12 px-4 py-5 sm:px-6 sm:py-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 lg:px-8 lg:py-6 2xl:px-12">
         <div>
-          <motion.p
-            {...rise(0)}
-            className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-sm font-semibold text-brand-700"
-          >
-            <Radio className="size-4" aria-hidden />
-            Live online and in-person classes
-          </motion.p>
-
           <motion.h1
             id="hero-title"
             {...rise(0.08)}
-            className="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl xl:text-7xl"
+            className="text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl xl:text-7xl"
           >
             Learn something <span className="text-brand-600">new</span> this week.
           </motion.h1>
 
-          <motion.p {...rise(0.16)} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+          <motion.p {...rise(0.16)} className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
             Live online and in-person classes in programming, English, maths and more. Pick a batch that fits your week
             and start learning.
           </motion.p>
 
-          <motion.div {...rise(0.24)} className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <motion.div {...rise(0.24)} className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/courses"
               className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-brand-500 to-brand-700 pl-7 pr-3 text-base font-semibold text-white shadow-[0_12px_28px_-10px_rgb(31_79_209/0.75),inset_0_1px_0_rgb(255_255_255/0.25)] transition-all duration-200 hover:shadow-[0_16px_34px_-10px_rgb(31_79_209/0.9),inset_0_1px_0_rgb(255_255_255/0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98] motion-safe:hover:-translate-y-0.5"
@@ -70,7 +62,7 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <motion.ul {...rise(0.32)} className="mt-10 flex flex-wrap gap-2.5" aria-label="Subjects">
+          <motion.ul {...rise(0.32)} className="mt-6 flex flex-wrap gap-2.5" aria-label="Subjects">
             {SUBJECTS.map(({ label, Icon }) => (
               <li
                 key={label}

@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero tighter, tag removed)
+- Tightened hero spacing further (desktop padding 1.5rem, smaller gaps) and removed the "Live online and in-person classes" tag above the headline (`src/components/hero.tsx`)
+
 ### 2026-11-20 (hero spacing)
 - Cut hero top/bottom padding (lg: 7rem to 3rem, mobile 4rem to 2rem) and moved background glow up (`src/components/hero.tsx`)
 
