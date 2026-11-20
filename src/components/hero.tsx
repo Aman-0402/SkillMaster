@@ -1,16 +1,17 @@
 import { lazy, Suspense } from "react";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Code2, Languages, MapPin, Radio, Sigma } from "lucide-react";
+import { ArrowRight, BarChart3, Brain, MapPin, Monitor, Radio, Server } from "lucide-react";
 
 const LadderScene = lazy(() => import("./ladder-scene"));
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const SUBJECTS = [
-  { label: "Programming", Icon: Code2 },
-  { label: "English", Icon: Languages },
-  { label: "Maths", Icon: Sigma },
+  { label: "Frontend", Icon: Monitor },
+  { label: "Backend", Icon: Server },
+  { label: "Data Analyst", Icon: BarChart3 },
+  { label: "AI", Icon: Brain },
 ];
 
 const CHIPS = [
@@ -59,8 +60,8 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p {...rise(0.16)} className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-600 sm:text-[1.35rem] sm:leading-relaxed">
-            Live online and in-person classes in programming, English, maths and more. Pick a batch that fits your week
-            and start learning.
+            Live online and in-person industry-level courses in frontend, backend, data analytics and AI. Pick a batch that
+            fits your week and start learning.
           </motion.p>
 
           <motion.div {...rise(0.24)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
@@ -81,7 +82,9 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <motion.ul {...rise(0.32)} className="mt-9 flex flex-wrap items-center gap-3" aria-label="Subjects">
+          <motion.div {...rise(0.32)} className="mt-9">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Industry-level courses</p>
+            <ul className="mt-3 flex flex-wrap items-center gap-3">
             {SUBJECTS.map(({ label, Icon }) => (
               <li
                 key={label}
@@ -93,8 +96,8 @@ export default function Hero() {
                 {label}
               </li>
             ))}
-            <li className="px-1 text-base font-semibold text-slate-500">and more</li>
-          </motion.ul>
+            </ul>
+          </motion.div>
         </div>
 
         <motion.div

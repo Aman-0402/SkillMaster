@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero courses)
+- Removed English and Maths chips; added "Industry-level courses" label with Frontend, Backend, Data Analyst, AI chips. Intro text now mentions industry-level courses in frontend, backend, data analytics and AI (`src/components/hero.tsx`)
+
 ### 2026-11-20 (hero left side)
 - Enlarged hero left content: headline up to 100px with hand-drawn underline on "new", larger intro text, taller buttons (64px, Join now fills dark on hover), subject chips as cards with icon tiles (`src/components/hero.tsx`)
 
