@@ -10,21 +10,12 @@ import {
 import clsx from "clsx";
 import {
   ArrowRight,
-  BookOpen,
   Briefcase,
   Building2,
-  CalendarDays,
   ChevronDown,
-  GraduationCap,
-  Handshake,
-  Image as ImageIcon,
-  Layers,
+  HelpCircle,
   LogIn,
   Menu,
-  Newspaper,
-  Presentation,
-  UserPlus,
-  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -34,71 +25,33 @@ type NavGroup = { key: string; label: string; items: NavItem[] };
 
 const GROUPS: NavGroup[] = [
   {
-    key: "services",
-    label: "Services",
-    items: [
-      { title: "Training programs", desc: "For students, colleges and companies", to: "/training", Icon: Presentation },
-      { title: "Trainers on demand", desc: "Expert trainers for your campus or team", to: "/trainers", Icon: Users },
-      { title: "Self-paced courses", desc: "Learn online, track your progress", to: "/courses", Icon: BookOpen },
-    ],
-  },
-  {
-    key: "company",
-    label: "Company",
+    key: "about",
+    label: "About",
     items: [
       { title: "About us", desc: "Our story, mission and values", to: "/about", Icon: Building2 },
-      { title: "Partners", desc: "Colleges and companies we work with", to: "/partners", Icon: Handshake },
-      { title: "Collaborations", desc: "Our MoUs and agreements", to: "/collaborations", Icon: Layers },
-      { title: "Meet the team", desc: "The people behind us", to: "/team", Icon: GraduationCap },
-    ],
-  },
-  {
-    key: "careers",
-    label: "Careers",
-    items: [
-      { title: "Trainer jobs", desc: "Open trainer positions", to: "/jobs", Icon: Briefcase },
-      { title: "Join as a trainer", desc: "Apply to our trainer panel", to: "/trainers/join", Icon: UserPlus },
-    ],
-  },
-  {
-    key: "resources",
-    label: "Resources",
-    items: [
-      { title: "Blog", desc: "Articles and career guides", to: "/blog", Icon: Newspaper },
-      { title: "Events", desc: "Workshops, webinars and drives", to: "/events", Icon: CalendarDays },
-      { title: "Gallery", desc: "Photos from our programs", to: "/gallery", Icon: ImageIcon },
+      { title: "Portfolio", desc: "Work and results we are proud of", to: "/portfolio", Icon: Briefcase },
+      { title: "FAQ", desc: "Answers to common questions", to: "/faq", Icon: HelpCircle },
     ],
   },
 ];
 
+type TopEntry = { type: "link"; label: string; to: string } | { type: "group"; key: string };
+
+const TOP: TopEntry[] = [
+  { type: "link", label: "Courses", to: "/courses" },
+  { type: "link", label: "Instructors", to: "/instructors" },
+  { type: "link", label: "Blog", to: "/blog" },
+  { type: "group", key: "about" },
+  { type: "link", label: "Contact", to: "/contact" },
+];
+
 const PROMO: Record<string, { eyebrow: string; title: string; text: string; to: string; cta: string }> = {
-  services: {
-    eyebrow: "Learn at your pace",
-    title: "Self-paced courses with free preview lessons",
-    text: "Browse the catalogue, enrol free and track your progress.",
-    to: "/courses",
-    cta: "Browse courses",
-  },
-  company: {
-    eyebrow: "Setu means bridge",
-    title: "The bridge between learning and work",
-    text: "Why we exist, how we work and the people behind it.",
+  about: {
+    eyebrow: "Who we are",
+    title: "Learn from people who do the work",
+    text: "Our story, the work we have done and answers to common questions.",
     to: "/about",
     cta: "Our story",
-  },
-  careers: {
-    eyebrow: "Hiring trainers now",
-    title: "Trainer openings",
-    text: "Colleges and companies need subject experts. Apply in minutes.",
-    to: "/jobs",
-    cta: "See all openings",
-  },
-  resources: {
-    eyebrow: "From the blog",
-    title: "Guides on skills, careers and training",
-    text: "Practical reads for students, colleges and teams.",
-    to: "/blog",
-    cta: "Open the blog",
   },
 };
 
@@ -273,7 +226,20 @@ function DesktopNav() {
 
   return (
     <div ref={rootRef} className="hidden items-center gap-1 lg:flex" onPointerLeave={() => setHovered(null)}>
-      {GROUPS.map((g) => {
+      {TOP.map((entry) => {
+        if (entry.type === "link") {
+          const key = entry.to;
+          const active = pathname === entry.to || pathname.startsWith(entry.to + "/");
+          return (
+            <div key={key} className="relative" onPointerEnter={(e) => e.pointerType === "mouse" && (setHovered(key), clear(), setOpen(null))}>
+              {!reduce && hovered === key && hoverPill}
+              <Link href={entry.to} className={linkCls(active)}>
+                {entry.label}
+              </Link>
+            </div>
+          );
+        }
+        const g = GROUPS.find((x) => x.key === entry.key)!;
         const isOpen = openKey === g.key;
         const current = g.items.some((i) => isActive(pathname, i.to));
         return (
@@ -293,12 +259,6 @@ function DesktopNav() {
           </div>
         );
       })}
-      <div className="relative" onPointerEnter={(e) => e.pointerType === "mouse" && setHovered("contact")}>
-        {!reduce && hovered === "contact" && hoverPill}
-        <Link href="/contact" className={linkCls(pathname === "/contact")}>
-          Contact
-        </Link>
-      </div>
 
       <AnimatePresence>
         {group && (
@@ -348,13 +308,32 @@ function MobileMenu({ onPick }: { onPick: () => void }) {
       transition={{ duration: 0.25 }}
     >
       <div className="mx-auto grid w-full max-w-site gap-8 px-4 py-8 sm:grid-cols-2 sm:px-6">
+        <motion.section
+          aria-labelledby="m-explore"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: 0.05 }}
+        >
+          <h2 id="m-explore" className="mb-2 px-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-300">
+            Explore
+          </h2>
+          <ul>
+            {TOP.flatMap((e) => (e.type === "link" ? [e] : [])).map((l) => (
+              <li key={l.to}>
+                <Link href={l.to} onClick={onPick} className="block rounded-2xl p-3 text-lg font-semibold transition-colors hover:bg-white/10">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.section>
         {GROUPS.map((g, i) => (
           <motion.section
             key={g.key}
             aria-labelledby={`m-${g.key}`}
             initial={reduce ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.05 + i * 0.07 }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.12 + i * 0.07 }}
           >
             <h2 id={`m-${g.key}`} className="mb-2 px-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-300">
               {g.label}

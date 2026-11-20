@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (navbar names)
+- Renamed navbar sections to the screenshot names: Courses, Instructors, Blog (plain links), About (dropdown: About us, Portfolio, FAQ), Contact. Removed Services/Company/Careers/Resources groups. Mobile menu gets an Explore section (`src/components/navbar.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (revert)
 - Reverted simple dark navbar (`73309fa`); DeepSetu-style mega navbar restored (`src/components/navbar.tsx`, `src/App.tsx`)
 
