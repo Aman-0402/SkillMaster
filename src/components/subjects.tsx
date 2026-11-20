@@ -80,11 +80,7 @@ export default function Subjects() {
                   aria-hidden
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [background:radial-gradient(420px_circle_at_var(--mx,50%)_var(--my,50%),rgb(57_101_227/0.28),transparent_60%)] group-hover:opacity-100"
                 />
-                <div className="relative flex items-center justify-between">
-                  <span className="flex items-center gap-4 text-xl font-bold text-brand-300 sm:text-2xl">
-                    {String(i + 1).padStart(2, "0")}
-                    <span aria-hidden className="h-px w-12 bg-brand-300/50 sm:w-16" />
-                  </span>
+                <div className="relative flex items-center justify-end">
                   <span className="flex size-14 items-center justify-center rounded-full border border-white/25 text-white transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-black sm:size-16">
                     <ArrowUpRight className="size-7 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
                   </span>
