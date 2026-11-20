@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (instructors dropdown)
+- Instructors is now a dropdown: All instructors (`/instructors`), Become an instructor (`/instructors/join`), Top rated (`/instructors/top`), with promo card (`src/components/navbar.tsx`)
+
 ### 2026-11-20 (courses dropdown)
 - Courses is now a dropdown: Frontend, Backend, Data Analyst, AI (`/courses/frontend`, `/courses/backend`, `/courses/data-analyst`, `/courses/ai`), with a promo card (`src/components/navbar.tsx`)
 

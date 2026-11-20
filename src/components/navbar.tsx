@@ -20,6 +20,9 @@ import {
   Menu,
   Monitor,
   Server,
+  Star,
+  UserPlus,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -39,6 +42,15 @@ const GROUPS: NavGroup[] = [
     ],
   },
   {
+    key: "instructors",
+    label: "Instructors",
+    items: [
+      { title: "All instructors", desc: "Meet everyone teaching on SkillMaster", to: "/instructors", Icon: Users },
+      { title: "Become an instructor", desc: "Apply to teach and share your skills", to: "/instructors/join", Icon: UserPlus },
+      { title: "Top rated", desc: "Our highest-rated instructors", to: "/instructors/top", Icon: Star },
+    ],
+  },
+  {
     key: "about",
     label: "About",
     items: [
@@ -53,7 +65,7 @@ type TopEntry = { type: "link"; label: string; to: string } | { type: "group"; k
 
 const TOP: TopEntry[] = [
   { type: "group", key: "courses" },
-  { type: "link", label: "Instructors", to: "/instructors" },
+  { type: "group", key: "instructors" },
   { type: "link", label: "Blog", to: "/blog" },
   { type: "group", key: "about" },
   { type: "link", label: "Contact", to: "/contact" },
@@ -66,6 +78,13 @@ const PROMO: Record<string, { eyebrow: string; title: string; text: string; to: 
     text: "Frontend, Backend, Data Analyst and AI courses in one place.",
     to: "/courses",
     cta: "Browse all courses",
+  },
+  instructors: {
+    eyebrow: "Teach with us",
+    title: "Learn from working professionals",
+    text: "Meet our instructors, or apply to join them.",
+    to: "/instructors",
+    cta: "See instructors",
   },
   about: {
     eyebrow: "Who we are",
