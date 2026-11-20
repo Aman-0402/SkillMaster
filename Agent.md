@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (subjects redesign)
+- Subjects section redesigned: 2x2 dark cards with cursor-follow glow, icon tile, ghost index number, description, tags, course count, circular arrow button (`src/components/subjects.tsx`)
+
 ### 2026-11-20 (subjects section)
 - Added black "Subjects" section below hero: large heading, hairline-divided rows (Frontend, Backend, Data Analyst, AI) with course count + arrow, hover colour/arrow shift, scroll-in animation (`src/components/subjects.tsx`, `src/App.tsx`)
 
