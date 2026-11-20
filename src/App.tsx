@@ -4,6 +4,7 @@ import Subjects from "@/components/subjects";
 import FeaturedCourses from "@/components/featured-courses";
 import HowItWorks from "@/components/how-it-works";
 import CtaBanner from "@/components/cta-banner";
+import Footer from "@/components/footer";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <HowItWorks />
         <CtaBanner />
       </main>
+      <Footer />
     </>
   );
 }

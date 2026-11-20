@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (footer)
+- Added black footer from user screenshot: text logo, tagline, WhatsApp/phone/email/hours, GitHub/LinkedIn/Instagram circles (LinkedIn/Instagram hrefs are "#" placeholders), Learn/Company/Legal link columns, copyright, Back to top button (`src/components/footer.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (cta banner)
 - Added CTA section "Your first class is one sign-up away." after How it works: rounded blue gradient panel, scroll-parallax circles, dot grid, Join now + Browse courses buttons (`src/components/cta-banner.tsx`, `src/App.tsx`)
 
