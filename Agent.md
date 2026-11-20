@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero)
+- Added hero section: headline "Learn something new this week.", subtext, CTAs Browse courses (`/courses`) and Join now (`/join`), subject chips, decorative "Your week" card. Replaced placeholder page content (`src/components/hero.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (action buttons)
 - Restyled Sign in / Register / Enquire now: 44px height, brand gradient CTA with glow and arrow badge, brand-tinted Register hover, press and focus states (`src/components/navbar.tsx`)
 
