@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (navbar v2)
+- Replaced DeepSetu-style mega navbar with simple dark navbar from user screenshot: Courses, Instructors, Blog, About, Portfolio, FAQ, Contact. More detail to be added later (`src/components/navbar.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (navbar)
 - Scaffolded Vite + React 19 + TS + Tailwind v3 app with `@/` alias (`package.json`, `vite.config.ts`, `tsconfig.json`, `tailwind.config.js`, `postcss.config.js`, `index.html`, `src/`)
 - Added navbar modeled on deepsetuai.in: sticky, hide-on-scroll-down, scroll progress bar, hover/click mega menu with promo card, black full-screen mobile menu. Brand palette copied to Tailwind config (`src/components/navbar.tsx`, `tailwind.config.js`)
