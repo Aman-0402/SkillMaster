@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (cta banner)
+- Added CTA section "Your first class is one sign-up away." after How it works: rounded blue gradient panel, scroll-parallax circles, dot grid, Join now + Browse courses buttons (`src/components/cta-banner.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (how it works scroll redesign)
 - How it works redesigned as scroll-driven: sticky left panel with big step counter that swaps per step, spring-filled progress line with dots, active step highlighted while others dim, hover nudge (`src/components/how-it-works.tsx`)
 

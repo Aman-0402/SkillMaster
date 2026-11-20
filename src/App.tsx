@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import Subjects from "@/components/subjects";
 import FeaturedCourses from "@/components/featured-courses";
 import HowItWorks from "@/components/how-it-works";
+import CtaBanner from "@/components/cta-banner";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Subjects />
         <FeaturedCourses />
         <HowItWorks />
+        <CtaBanner />
       </main>
     </>
   );
