@@ -39,45 +39,61 @@ export default function Hero() {
           <motion.h1
             id="hero-title"
             {...rise(0.08)}
-            className="max-w-3xl text-balance text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl xl:text-7xl"
+            className="text-[2.9rem] font-extrabold leading-[1.02] tracking-tight text-slate-950 sm:text-7xl xl:text-[5.5rem] 2xl:text-[6.25rem]"
           >
-            Learn something <span className="text-brand-600">new</span> this week.
+            <span className="block">Learn something</span>
+            <span className="block">
+              <span className="relative inline-block text-brand-600">
+                new
+                <svg
+                  aria-hidden
+                  viewBox="0 0 200 14"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-1 left-0 h-[0.2em] w-full text-brand-300"
+                >
+                  <path d="M2 9 C 40 1, 80 13, 120 6 S 180 4, 198 8" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+              </span>{" "}
+              this week.
+            </span>
           </motion.h1>
 
-          <motion.p {...rise(0.16)} className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
+          <motion.p {...rise(0.16)} className="mt-6 max-w-2xl text-xl leading-relaxed text-slate-600 sm:text-[1.35rem] sm:leading-relaxed">
             Live online and in-person classes in programming, English, maths and more. Pick a batch that fits your week
             and start learning.
           </motion.p>
 
-          <motion.div {...rise(0.24)} className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <motion.div {...rise(0.24)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <Link
               href="/courses"
-              className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-brand-500 to-brand-700 pl-7 pr-3 text-base font-semibold text-white shadow-[0_12px_28px_-10px_rgb(31_79_209/0.75),inset_0_1px_0_rgb(255_255_255/0.25)] transition-all duration-200 hover:shadow-[0_16px_34px_-10px_rgb(31_79_209/0.9),inset_0_1px_0_rgb(255_255_255/0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98] motion-safe:hover:-translate-y-0.5"
+              className="group inline-flex h-16 items-center justify-center gap-3 rounded-full bg-gradient-to-b from-brand-500 to-brand-700 pl-9 pr-3 text-lg font-semibold text-white shadow-[0_14px_32px_-10px_rgb(31_79_209/0.75),inset_0_1px_0_rgb(255_255_255/0.25)] transition-all duration-200 hover:shadow-[0_18px_38px_-10px_rgb(31_79_209/0.9),inset_0_1px_0_rgb(255_255_255/0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98] motion-safe:hover:-translate-y-0.5"
             >
               Browse courses
-              <span className="flex size-8 items-center justify-center rounded-full bg-white/20 transition-colors duration-300 group-hover:bg-white group-hover:text-brand-700">
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+              <span className="flex size-10 items-center justify-center rounded-full bg-white/20 transition-colors duration-300 group-hover:bg-white group-hover:text-brand-700">
+                <ArrowRight className="size-5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
               </span>
             </Link>
             <Link
               href="/join"
-              className="inline-flex h-14 items-center justify-center rounded-full border border-slate-300 bg-white px-8 text-base font-semibold text-slate-900 transition-all duration-200 hover:border-slate-950 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98]"
+              className="inline-flex h-16 items-center justify-center rounded-full border-2 border-slate-900 bg-white px-10 text-lg font-semibold text-slate-900 transition-all duration-200 hover:bg-slate-950 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98]"
             >
               Join now
             </Link>
           </motion.div>
 
-          <motion.ul {...rise(0.32)} className="mt-6 flex flex-wrap gap-2.5" aria-label="Subjects">
+          <motion.ul {...rise(0.32)} className="mt-9 flex flex-wrap items-center gap-3" aria-label="Subjects">
             {SUBJECTS.map(({ label, Icon }) => (
               <li
                 key={label}
-                className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700"
+                className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-white py-2.5 pl-2.5 pr-5 text-base font-semibold text-slate-800 shadow-[0_8px_20px_-14px_rgb(15_23_42/0.35)] transition-transform duration-200 motion-safe:hover:-translate-y-0.5"
               >
-                <Icon className="size-4 text-brand-600" aria-hidden />
+                <span className="flex size-9 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                  <Icon className="size-5" aria-hidden />
+                </span>
                 {label}
               </li>
             ))}
-            <li className="inline-flex items-center rounded-full px-2 py-2 text-sm font-semibold text-slate-500">and more</li>
+            <li className="px-1 text-base font-semibold text-slate-500">and more</li>
           </motion.ul>
         </div>
 

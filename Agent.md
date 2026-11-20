@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero left side)
+- Enlarged hero left content: headline up to 100px with hand-drawn underline on "new", larger intro text, taller buttons (64px, Join now fills dark on hover), subject chips as cards with icon tiles (`src/components/hero.tsx`)
+
 ### 2026-11-20 (3D scene cleanup)
 - Reworked 3D hero scene: 2 students now face the ladder and climb rung by rung with hands on rungs (no overlap), real 5-point star, thinner ladder with feet, 3 small cubes, chips moved off the scene (`src/components/ladder-scene.tsx`, `src/components/hero.tsx`)
 
