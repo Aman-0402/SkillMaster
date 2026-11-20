@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (subjects section)
+- Added black "Subjects" section below hero: large heading, hairline-divided rows (Frontend, Backend, Data Analyst, AI) with course count + arrow, hover colour/arrow shift, scroll-in animation (`src/components/subjects.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (hero courses)
 - Removed English and Maths chips; added "Industry-level courses" label with Frontend, Backend, Data Analyst, AI chips. Intro text now mentions industry-level courses in frontend, backend, data analytics and AI (`src/components/hero.tsx`)
 
