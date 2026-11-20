@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
 import Subjects from "@/components/subjects";
+import FeaturedCourses from "@/components/featured-courses";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <main>
         <Hero />
         <Subjects />
+        <FeaturedCourses />
       </main>
     </>
   );
