@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Code2, Languages, Sigma } from "lucide-react";
+import { ArrowRight, Code2, Languages, MapPin, Radio, Sigma } from "lucide-react";
 
 const LadderScene = lazy(() => import("./ladder-scene"));
 
@@ -11,6 +11,11 @@ const SUBJECTS = [
   { label: "Programming", Icon: Code2 },
   { label: "English", Icon: Languages },
   { label: "Maths", Icon: Sigma },
+];
+
+const CHIPS = [
+  { label: "Live online", Icon: Radio, pos: "left-0 top-[14%]", delay: 0 },
+  { label: "In-person", Icon: MapPin, pos: "left-0 bottom-[20%]", delay: 1.2 },
 ];
 
 export default function Hero() {
@@ -29,12 +34,12 @@ export default function Hero() {
       />
       <div aria-hidden className="absolute -right-24 -top-40 -z-10 size-[28rem] rounded-full bg-brand-100 blur-3xl" />
 
-      <div className="mx-auto grid w-full max-w-site items-center gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:px-8 lg:py-8 2xl:px-12">
+      <div className="mx-auto grid w-full max-w-site items-center gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-8 lg:px-8 lg:py-8 2xl:px-12">
         <div>
           <motion.h1
             id="hero-title"
             {...rise(0.08)}
-            className="text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl xl:text-7xl"
+            className="max-w-3xl text-balance text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-950 sm:text-6xl xl:text-7xl"
           >
             Learn something <span className="text-brand-600">new</span> this week.
           </motion.h1>
@@ -82,11 +87,25 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
           role="img"
           aria-label="3D illustration of students climbing a ladder toward a golden star"
-          className="relative mx-auto h-[26rem] w-full max-w-xl sm:h-[30rem] lg:h-[34rem] lg:max-w-none"
+          className="relative mx-auto h-[30rem] w-full sm:h-[36rem] lg:h-[36rem]"
         >
           <Suspense fallback={null}>
             <LadderScene animate={!reduce} />
           </Suspense>
+          {CHIPS.map(({ label, Icon, pos, delay }) => (
+            <motion.span
+              key={label}
+              aria-hidden
+              animate={reduce ? undefined : { y: [0, -8, 0] }}
+              transition={{ duration: 5, ease: "easeInOut", repeat: Infinity, delay }}
+              className={`pointer-events-none absolute hidden items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-[0_16px_40px_-16px_rgb(15_23_42/0.45)] backdrop-blur-md sm:inline-flex ${pos}`}
+            >
+              <span className="flex size-7 items-center justify-center rounded-full bg-brand-600 text-white">
+                <Icon className="size-3.5" />
+              </span>
+              {label}
+            </motion.span>
+          ))}
         </motion.div>
       </div>
     </section>

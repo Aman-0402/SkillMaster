@@ -4,16 +4,16 @@ import * as THREE from "three";
 
 const BRAND = "#1f4fd1";
 const BRAND_DARK = "#142c6b";
-const RUNGS = 8;
+const RUNGS = 7;
 const RUNG_GAP = 0.62;
 const LADDER_H = RUNGS * RUNG_GAP;
 
 type Kid = { shirt: string; skin: string; hair: string; offset: number; speed: number };
 
 const KIDS: Kid[] = [
-  { shirt: "#f59e0b", skin: "#f1c27d", hair: "#2b1b12", offset: 0.0, speed: 0.055 },
-  { shirt: "#10b981", skin: "#8d5524", hair: "#120a06", offset: 0.34, speed: 0.055 },
-  { shirt: "#ec4899", skin: "#e0ac69", hair: "#4a2c17", offset: 0.67, speed: 0.055 },
+  { shirt: "#f59e0b", skin: "#f1c27d", hair: "#2b1b12", offset: 0.0, speed: 0.05 },
+  { shirt: "#10b981", skin: "#8d5524", hair: "#120a06", offset: 0.34, speed: 0.05 },
+  { shirt: "#ec4899", skin: "#e0ac69", hair: "#4a2c17", offset: 0.67, speed: 0.05 },
 ];
 
 const smooth = (a: number, b: number, x: number) => {
@@ -96,6 +96,10 @@ function Student({ kid, animate }: { kid: Kid; animate: boolean }) {
         <group key={x} ref={ref} position={[x, 0.9, 0]}>
           <mesh position={[0, -0.2, 0]} castShadow>
             <capsuleGeometry args={[0.065, 0.3, 4, 10]} />
+            <meshStandardMaterial color={kid.shirt} roughness={0.6} />
+          </mesh>
+          <mesh position={[0, -0.43, 0]} castShadow>
+            <sphereGeometry args={[0.075, 14, 14]} />
             <meshStandardMaterial color={kid.skin} roughness={0.7} />
           </mesh>
         </group>
@@ -125,10 +129,47 @@ function Star({ animate }: { animate: boolean }) {
     ref.current.position.y = LADDER_H + 0.75 + Math.sin(c * 2) * 0.08;
   });
   return (
-    <mesh ref={ref} position={[0, LADDER_H + 0.75, 0]}>
-      <octahedronGeometry args={[0.3, 0]} />
-      <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.7} roughness={0.25} metalness={0.4} />
-    </mesh>
+    <group>
+      <mesh position={[0, LADDER_H + 0.75, 0]}>
+        <sphereGeometry args={[0.5, 24, 24]} />
+        <meshBasicMaterial color="#fde68a" transparent opacity={0.14} toneMapped={false} depthWrite={false} />
+      </mesh>
+      <mesh ref={ref} position={[0, LADDER_H + 0.75, 0]}>
+        <octahedronGeometry args={[0.34, 0]} />
+        <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.8} roughness={0.25} metalness={0.4} />
+      </mesh>
+    </group>
+  );
+}
+
+const CUBES = [
+  { c: "#3965e3", x: -1.45, y: 1.4, z: 0.4, s: 0.34, p: 0 },
+  { c: "#f59e0b", x: 1.45, y: 2.6, z: 0.2, s: 0.28, p: 1.5 },
+  { c: "#10b981", x: -1.3, y: 3.6, z: -0.2, s: 0.26, p: 3 },
+  { c: "#ec4899", x: 1.3, y: 4.3, z: 0.5, s: 0.3, p: 4.5 },
+];
+
+function FloatingCubes({ animate }: { animate: boolean }) {
+  const refs = useRef<(THREE.Mesh | null)[]>([]);
+  useFrame(({ clock }) => {
+    const c = animate ? clock.getElapsedTime() : 0;
+    refs.current.forEach((m, i) => {
+      if (!m) return;
+      const d = CUBES[i];
+      m.position.y = d.y + Math.sin(c * 1.2 + d.p) * 0.15;
+      m.rotation.x = c * 0.6 + d.p;
+      m.rotation.y = c * 0.8 + d.p;
+    });
+  });
+  return (
+    <>
+      {CUBES.map((d, i) => (
+        <mesh key={i} ref={(m) => { refs.current[i] = m; }} position={[d.x, d.y, d.z]} castShadow>
+          <boxGeometry args={[d.s, d.s, d.s]} />
+          <meshStandardMaterial color={d.c} roughness={0.4} metalness={0.1} />
+        </mesh>
+      ))}
+    </>
   );
 }
 
@@ -139,7 +180,7 @@ function Books() {
     { c: "#10b981", w: 1.0, y: 0.45 },
   ];
   return (
-    <group position={[1.7, 0, 0.5]} rotation={[0, -0.5, 0]}>
+    <group position={[1.35, 0, 0.7]} rotation={[0, -0.5, 0]}>
       {stack.map((b, i) => (
         <mesh key={i} position={[0, b.y, 0]} rotation={[0, i * 0.18, 0]} castShadow>
           <boxGeometry args={[b.w, 0.16, 0.72]} />
@@ -175,7 +216,7 @@ function Scene({ animate }: { animate: boolean }) {
         shadow-camera-bottom={-10}
         shadow-camera-far={40}
       />
-      <group ref={group} position={[0, -2.8, 0]}>
+      <group ref={group} position={[0, -2.3, 0]}>
         {/* lean the ladder back a touch */}
         <group rotation={[-0.08, 0, 0]}>
           <Ladder />
@@ -185,16 +226,17 @@ function Scene({ animate }: { animate: boolean }) {
           <Star animate={animate} />
         </group>
         <Books />
+        <FloatingCubes animate={animate} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
-          <circleGeometry args={[2.9, 64]} />
+          <circleGeometry args={[2.1, 64]} />
           <meshBasicMaterial color="#dbe6ff" toneMapped={false} />
         </mesh>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
-          <circleGeometry args={[2.9, 64]} />
+          <circleGeometry args={[2.1, 64]} />
           <shadowMaterial opacity={0.18} />
         </mesh>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.0, 0]}>
-          <ringGeometry args={[2.9, 2.97, 64]} />
+          <ringGeometry args={[2.1, 2.16, 64]} />
           <meshBasicMaterial color={BRAND} transparent opacity={0.35} />
         </mesh>
       </group>

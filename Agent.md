@@ -31,6 +31,10 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero 3D resize)
+- Hero scene confined to right 30% (grid 7fr/3fr), rescaled to fit, added floating cubes and glass chips (Live online, In-person), 3 students; headline set to balanced wrap (`src/components/hero.tsx`, `src/components/ladder-scene.tsx`)
+- Removed navbar scroll progress bar (`src/components/navbar.tsx`)
+
 ### 2026-11-20 (3D hero)
 - Added 3D scene on hero right side: students climbing a ladder toward a gold star, books stack, soft shadows, pointer parallax. Built with `three` + `@react-three/fiber` (lazy loaded, animation off for reduced motion). Hero is two columns again, left aligned (`src/components/ladder-scene.tsx`, `src/components/hero.tsx`, `package.json`)
 

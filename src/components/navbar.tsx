@@ -4,8 +4,6 @@ import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useScroll,
-  useSpring,
 } from "framer-motion";
 import clsx from "clsx";
 import {
@@ -450,9 +448,6 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const mobileOpen = mobileAt === pathname;
 
-  const { scrollYProgress } = useScroll();
-  const smooth = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 });
-
   useEffect(() => {
     let last = window.scrollY;
     const onScroll = () => {
@@ -562,14 +557,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
-      {!mobileOpen && (
-        <motion.span
-          aria-hidden
-          style={{ scaleX: reduce ? scrollYProgress : smooth }}
-          className="absolute inset-x-0 -bottom-px h-0.5 origin-left bg-brand-600"
-        />
-      )}
 
       <AnimatePresence>{mobileOpen && <MobileMenu onPick={close} />}</AnimatePresence>
     </motion.header>
