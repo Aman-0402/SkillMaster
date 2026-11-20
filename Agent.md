@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero scene: trainer, colours, win)
+- 3D hero scene: climbers get random shirt/skin/hair colours every lap; each climber now reaches the top (6 rungs), turns to camera, jumps with arms up, star spins/pulses and a confetti burst fires; added a trainer (red shirt, cap, clipboard) who spots the ladder and cheers on every win; climbers have faces (`src/components/ladder-scene.tsx`)
+
 ### 2026-11-20 (footer)
 - Added black footer from user screenshot: text logo, tagline, WhatsApp/phone/email/hours, GitHub/LinkedIn/Instagram circles (LinkedIn/Instagram hrefs are "#" placeholders), Learn/Company/Legal link columns, copyright, Back to top button (`src/components/footer.tsx`, `src/App.tsx`)
 
