@@ -31,6 +31,11 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (navbar)
+- Scaffolded Vite + React 19 + TS + Tailwind v3 app with `@/` alias (`package.json`, `vite.config.ts`, `tsconfig.json`, `tailwind.config.js`, `postcss.config.js`, `index.html`, `src/`)
+- Added navbar modeled on deepsetuai.in: sticky, hide-on-scroll-down, scroll progress bar, hover/click mega menu with promo card, black full-screen mobile menu. Brand palette copied to Tailwind config (`src/components/navbar.tsx`, `tailwind.config.js`)
+- Added `dist/` to `.gitignore`
+
 ### 2026-11-20
 - Installed `react` and `react-dom` (`package.json`, `package-lock.json`)
 - Added `web-dev-skills/` skills pack (`web-dev-skills/`)
