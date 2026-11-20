@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (action buttons)
+- Restyled Sign in / Register / Enquire now: 44px height, brand gradient CTA with glow and arrow badge, brand-tinted Register hover, press and focus states (`src/components/navbar.tsx`)
+
 ### 2026-11-20 (blog dropdown)
 - Blog is now a dropdown: Latest articles (`/blog`), Tutorials (`/blog/tutorials`), Career guides (`/blog/career-guides`), News (`/blog/news`), with promo card (`src/components/navbar.tsx`)
 

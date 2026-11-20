@@ -125,6 +125,9 @@ function isActive(pathname: string, to: string) {
   return !ALL_PATHS.some((p) => p !== to && p.startsWith(to + "/") && pathname.startsWith(p));
 }
 
+const btn =
+  "inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-all duration-200 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600";
+
 const pill =
   "inline-flex h-10 items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors duration-200";
 
@@ -504,23 +507,37 @@ export default function Navbar() {
           <Link
             href="/login"
             aria-label="Sign in"
-            className={clsx(pill, "text-slate-700 hover:bg-slate-100 hover:text-slate-950 max-xl:w-10 max-xl:px-0", mobileOpen ? "hidden" : "hidden sm:inline-flex")}
+            className={clsx(
+              btn,
+              "text-slate-600 hover:bg-slate-100 hover:text-slate-950 max-xl:w-11 max-xl:px-0",
+              mobileOpen ? "hidden" : "hidden sm:inline-flex",
+            )}
           >
-            <LogIn className="size-4" aria-hidden />
+            <LogIn className="size-[1.1rem]" aria-hidden />
             <span className="hidden xl:inline">Sign in</span>
           </Link>
           <Link
             href="/join"
-            className={clsx(pill, "border border-slate-300 text-slate-900 hover:border-slate-950", mobileOpen ? "hidden" : "hidden md:inline-flex")}
+            className={clsx(
+              btn,
+              "border border-slate-300 bg-white text-slate-900 hover:border-brand-600 hover:bg-brand-50 hover:text-brand-700",
+              mobileOpen ? "hidden" : "hidden md:inline-flex",
+            )}
           >
             Register
           </Link>
           <Link
             href="/contact"
-            className={clsx(pill, "group bg-slate-950 text-white hover:bg-brand-600", mobileOpen ? "hidden" : "hidden sm:inline-flex")}
+            className={clsx(
+              btn,
+              "group relative overflow-hidden bg-gradient-to-b from-brand-500 to-brand-700 pr-2 text-white shadow-[0_8px_20px_-8px_rgb(31_79_209/0.7),inset_0_1px_0_rgb(255_255_255/0.25)] hover:shadow-[0_12px_26px_-8px_rgb(31_79_209/0.85),inset_0_1px_0_rgb(255_255_255/0.25)] motion-safe:hover:-translate-y-0.5",
+              mobileOpen ? "hidden" : "hidden sm:inline-flex",
+            )}
           >
             Enquire now
-            <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+            <span className="flex size-7 items-center justify-center rounded-full bg-white/20 transition-colors duration-300 group-hover:bg-white group-hover:text-brand-700">
+              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
+            </span>
           </Link>
           <button
             type="button"
