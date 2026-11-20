@@ -1,7 +1,7 @@
 import type { MouseEvent } from "react";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, BarChart3, Brain, Monitor, Server } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -12,7 +12,6 @@ const SUBJECTS = [
     tags: ["HTML & CSS", "React", "TypeScript"],
     count: 1,
     to: "/courses/frontend",
-    Icon: Monitor,
   },
   {
     title: "Backend",
@@ -20,7 +19,6 @@ const SUBJECTS = [
     tags: ["Node.js", "APIs", "SQL"],
     count: 1,
     to: "/courses/backend",
-    Icon: Server,
   },
   {
     title: "Data Analyst",
@@ -28,7 +26,6 @@ const SUBJECTS = [
     tags: ["Excel", "SQL", "Power BI"],
     count: 1,
     to: "/courses/data-analyst",
-    Icon: BarChart3,
   },
   {
     title: "AI",
@@ -36,7 +33,6 @@ const SUBJECTS = [
     tags: ["Python", "ML", "LLMs"],
     count: 1,
     to: "/courses/ai",
-    Icon: Brain,
   },
 ];
 
@@ -67,7 +63,7 @@ export default function Subjects() {
         </div>
 
         <ul className="mt-12 grid gap-5 sm:mt-16 md:grid-cols-2">
-          {SUBJECTS.map(({ title, desc, tags, count, to, Icon }, i) => (
+          {SUBJECTS.map(({ title, desc, tags, count, to }, i) => (
             <motion.li
               key={title}
               initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -91,10 +87,7 @@ export default function Subjects() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <div className="relative flex items-start justify-between">
-                  <span className="flex size-14 items-center justify-center rounded-2xl bg-brand-600/20 text-brand-300 ring-1 ring-brand-400/30 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
-                    <Icon className="size-7" aria-hidden />
-                  </span>
+                <div className="relative flex items-start justify-end">
                   <span className="flex size-12 items-center justify-center rounded-full border border-white/20 text-white/70 transition-all duration-300 group-hover:rotate-0 group-hover:border-white group-hover:bg-white group-hover:text-black motion-safe:-rotate-45">
                     <ArrowUpRight className="size-5" aria-hidden />
                   </span>

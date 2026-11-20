@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (subjects icons removed)
+- Removed icon tiles from Subjects cards (`src/components/subjects.tsx`)
+
 ### 2026-11-20 (subjects redesign)
 - Subjects section redesigned: 2x2 dark cards with cursor-follow glow, icon tile, ghost index number, description, tags, course count, circular arrow button (`src/components/subjects.tsx`)
 
