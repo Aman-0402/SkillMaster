@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (how it works)
+- Added black "From sign-up to first class" section after Featured courses: 4 numbered step cards (account, pick course, batch + UPI pay, start learning) (`src/components/how-it-works.tsx`, `src/App.tsx`)
+
 ### 2026-11-20 (featured courses)
 - Added white "Featured courses" section after Subjects: 4 course cards (gradient thumbnail, title, description, duration/level/mode, View course link) + "View all courses" button; placeholder course data (`src/components/featured-courses.tsx`, `src/App.tsx`)
 
