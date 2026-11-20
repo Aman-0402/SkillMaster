@@ -1,6 +1,9 @@
+import { lazy, Suspense } from "react";
 import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Code2, Languages, Sigma } from "lucide-react";
+
+const LadderScene = lazy(() => import("./ladder-scene"));
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -26,8 +29,8 @@ export default function Hero() {
       />
       <div aria-hidden className="absolute -right-24 -top-40 -z-10 size-[28rem] rounded-full bg-brand-100 blur-3xl" />
 
-      <div className="mx-auto w-full max-w-site px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16 2xl:px-12">
-        <div className="mx-auto max-w-3xl text-center">
+      <div className="mx-auto grid w-full max-w-site items-center gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10 lg:px-8 lg:py-8 2xl:px-12">
+        <div>
           <motion.h1
             id="hero-title"
             {...rise(0.08)}
@@ -36,12 +39,12 @@ export default function Hero() {
             Learn something <span className="text-brand-600">new</span> this week.
           </motion.h1>
 
-          <motion.p {...rise(0.16)} className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
+          <motion.p {...rise(0.16)} className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
             Live online and in-person classes in programming, English, maths and more. Pick a batch that fits your week
             and start learning.
           </motion.p>
 
-          <motion.div {...rise(0.24)} className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+          <motion.div {...rise(0.24)} className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/courses"
               className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-b from-brand-500 to-brand-700 pl-7 pr-3 text-base font-semibold text-white shadow-[0_12px_28px_-10px_rgb(31_79_209/0.75),inset_0_1px_0_rgb(255_255_255/0.25)] transition-all duration-200 hover:shadow-[0_16px_34px_-10px_rgb(31_79_209/0.9),inset_0_1px_0_rgb(255_255_255/0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 active:scale-[0.98] motion-safe:hover:-translate-y-0.5"
@@ -59,7 +62,7 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-          <motion.ul {...rise(0.32)} className="mt-6 flex flex-wrap justify-center gap-2.5" aria-label="Subjects">
+          <motion.ul {...rise(0.32)} className="mt-6 flex flex-wrap gap-2.5" aria-label="Subjects">
             {SUBJECTS.map(({ label, Icon }) => (
               <li
                 key={label}
@@ -73,6 +76,18 @@ export default function Hero() {
           </motion.ul>
         </div>
 
+        <motion.div
+          initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+          role="img"
+          aria-label="3D illustration of students climbing a ladder toward a golden star"
+          className="relative mx-auto h-[26rem] w-full max-w-xl sm:h-[30rem] lg:h-[34rem] lg:max-w-none"
+        >
+          <Suspense fallback={null}>
+            <LadderScene animate={!reduce} />
+          </Suspense>
+        </motion.div>
       </div>
     </section>
   );
