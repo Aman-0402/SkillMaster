@@ -29,7 +29,30 @@ Format, newest first:
 - `web-dev-skills/` holds portable Claude Code skills, references, and `prompt.txt`. See its `README.md`.
 - Add new skills as `web-dev-skills/<skill-name>/SKILL.md` with `name` and `description` frontmatter.
 
+## Site notes
+
+Stack: Vite + React 19 + TypeScript, Tailwind v3 (brand palette in `tailwind.config.js`), wouter, framer-motion, lucide-react, three + @react-three/fiber (lazy loaded). Alias `@/` = `src/`.
+
+Page order in `src/App.tsx`: Navbar, Hero, Subjects (black), Featured courses (white), How it works (black, scroll-driven), CTA banner (blue panel on white), Footer (black).
+
+Components live in `src/components/`: `navbar`, `hero`, `ladder-scene` (3D), `subjects`, `featured-courses`, `how-it-works`, `cta-banner`, `footer`.
+
+Design rules the user has asked for:
+- Big, readable type (titles 48-72px, body 20-24px). Avoid empty padding and decorative extras (no icon tiles or index numbers on Subjects cards).
+- Dark and light sections alternate. Every section gets a scroll-in animation and a hover effect; respect `useReducedMotion`.
+- Nothing is copied from deepsetuai.in (layout inspiration only, own logo and copy).
+
+Placeholders still to replace: course data and counts (Subjects, Featured courses), footer LinkedIn/Instagram links (`#`), logo image (text logo for now). Linked pages do not exist yet: `/courses/*`, `/instructors*`, `/blog*`, `/about`, `/portfolio`, `/faq`, `/contact`, `/join`, `/login`, `/saved`, `/privacy`, `/terms`, `/refund`, `/cookies`.
+
+Dev notes:
+- `npm run dev`, `npm run check` (tsc), `npm run build` (tsc + vite). Run builds from PowerShell. Building through the Git Bash path (`/d/code/...`) can produce a bundle that crashes with `Cannot read properties of null (reading 'useContext')` (duplicate React from path casing).
+- Never kill all `node` processes when cleaning up previews; stop only the process you started.
+- Headless Edge screenshots of the WebGL scene are flaky; retry at different `--virtual-time-budget` values.
+
 ## Updates
+
+### 2026-11-20 (Agent.md notes)
+- Added "Site notes" section: stack, section order, component list, design rules, placeholders, dev notes (`Agent.md`)
 
 ### 2026-11-20 (hero scene: trainer, colours, win)
 - 3D hero scene: climbers get random shirt/skin/hair colours every lap; each climber now reaches the top (6 rungs), turns to camera, jumps with arms up, star spins/pulses and a confetti burst fires; added a trainer (red shirt, cap, clipboard) who spots the ladder and cheers on every win; climbers have faces (`src/components/ladder-scene.tsx`)
