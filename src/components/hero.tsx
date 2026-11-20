@@ -14,8 +14,8 @@ const SUBJECTS = [
 ];
 
 const CHIPS = [
-  { label: "Live online", Icon: Radio, pos: "left-0 top-[14%]", delay: 0 },
-  { label: "In-person", Icon: MapPin, pos: "left-0 bottom-[20%]", delay: 1.2 },
+  { label: "Live online", Icon: Radio, pos: "left-0 top-[8%]", delay: 0 },
+  { label: "In-person", Icon: MapPin, pos: "right-0 top-[36%]", delay: 1.2 },
 ];
 
 export default function Hero() {

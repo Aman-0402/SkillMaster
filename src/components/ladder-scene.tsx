@@ -1,19 +1,20 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 const BRAND = "#1f4fd1";
+const RAIL = "#3965e3";
 const BRAND_DARK = "#142c6b";
 const RUNGS = 7;
 const RUNG_GAP = 0.62;
 const LADDER_H = RUNGS * RUNG_GAP;
+const STEPS = 5;
 
 type Kid = { shirt: string; skin: string; hair: string; offset: number; speed: number };
 
 const KIDS: Kid[] = [
-  { shirt: "#f59e0b", skin: "#f1c27d", hair: "#2b1b12", offset: 0.0, speed: 0.05 },
-  { shirt: "#10b981", skin: "#8d5524", hair: "#120a06", offset: 0.34, speed: 0.05 },
-  { shirt: "#ec4899", skin: "#e0ac69", hair: "#4a2c17", offset: 0.67, speed: 0.05 },
+  { shirt: "#f59e0b", skin: "#f1c27d", hair: "#2b1b12", offset: 0.0, speed: 0.045 },
+  { shirt: "#10b981", skin: "#8d5524", hair: "#120a06", offset: 0.5, speed: 0.045 },
 ];
 
 const smooth = (a: number, b: number, x: number) => {
@@ -22,18 +23,24 @@ const smooth = (a: number, b: number, x: number) => {
 };
 
 function Ladder() {
-  const rails = [-0.6, 0.6];
+  const rails = [-0.55, 0.55];
   return (
     <group>
       {rails.map((x) => (
-        <mesh key={x} position={[x, LADDER_H / 2, 0]} castShadow>
-          <boxGeometry args={[0.12, LADDER_H + 0.5, 0.16]} />
-          <meshStandardMaterial color={BRAND} roughness={0.45} metalness={0.15} />
-        </mesh>
+        <group key={x}>
+          <mesh position={[x, LADDER_H / 2 + 0.1, 0]} castShadow>
+            <boxGeometry args={[0.09, LADDER_H + 0.5, 0.12]} />
+            <meshStandardMaterial color={RAIL} roughness={0.4} metalness={0.1} />
+          </mesh>
+          <mesh position={[x, 0.03, 0]} castShadow>
+            <boxGeometry args={[0.15, 0.06, 0.2]} />
+            <meshStandardMaterial color={BRAND_DARK} roughness={0.8} />
+          </mesh>
+        </group>
       ))}
       {Array.from({ length: RUNGS }, (_, i) => (
         <mesh key={i} position={[0, 0.35 + i * RUNG_GAP, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
-          <cylinderGeometry args={[0.055, 0.055, 1.2, 14]} />
+          <cylinderGeometry args={[0.04, 0.04, 1.1, 14]} />
           <meshStandardMaterial color="#e2e8f0" roughness={0.35} metalness={0.3} />
         </mesh>
       ))}
@@ -41,6 +48,7 @@ function Ladder() {
   );
 }
 
+/** Student faces the ladder (back to camera) and climbs one rung at a time. */
 function Student({ kid, animate }: { kid: Kid; animate: boolean }) {
   const root = useRef<THREE.Group>(null);
   const armL = useRef<THREE.Group>(null);
@@ -48,47 +56,46 @@ function Student({ kid, animate }: { kid: Kid; animate: boolean }) {
   const legL = useRef<THREE.Group>(null);
   const legR = useRef<THREE.Group>(null);
 
-  const pose = (t: number, clock: number) => {
-    if (!root.current) return;
-    const y = 0.15 + t * (LADDER_H - 0.7);
-    root.current.position.y = y;
-    const s = smooth(0, 0.08, t) * (1 - smooth(0.92, 1, t));
-    root.current.scale.setScalar(Math.max(0.0001, s));
-    const swing = Math.sin(clock * 5 + kid.offset * 9) * 0.9;
-    if (armL.current) armL.current.rotation.x = -1.9 + swing * 0.5;
-    if (armR.current) armR.current.rotation.x = -1.9 - swing * 0.5;
-    if (legL.current) legL.current.rotation.x = -0.4 - swing * 0.45;
-    if (legR.current) legR.current.rotation.x = -0.4 + swing * 0.45;
-    root.current.rotation.z = Math.sin(clock * 2.5 + kid.offset * 7) * 0.03;
-  };
-
   useFrame(({ clock }) => {
-    const c = clock.getElapsedTime();
-    pose(animate ? (c * kid.speed + kid.offset) % 1 : 0.2 + kid.offset * 0.6, animate ? c : 0);
+    if (!root.current) return;
+    const c = animate ? clock.getElapsedTime() : 0;
+    const t = animate ? (c * kid.speed + kid.offset) % 1 : 0.3 + kid.offset * 0.4;
+    const u = t * STEPS;
+    const k = Math.floor(u);
+    const ease = smooth(0.15, 0.85, u - k);
+    const even = k % 2 === 0;
+
+    root.current.position.y = 0.05 + (k + ease) * RUNG_GAP;
+    const s = smooth(0, 0.05, t) * (1 - smooth(0.95, 1, t));
+    root.current.scale.setScalar(Math.max(0.0001, s));
+
+    const hi = -2.45;
+    const lo = -1.75;
+    const a = even ? ease : 1 - ease;
+    if (armL.current) armL.current.rotation.x = lo + (hi - lo) * a;
+    if (armR.current) armR.current.rotation.x = lo + (hi - lo) * (1 - a);
+    if (legL.current) legL.current.rotation.x = -0.15 - 0.85 * (1 - a);
+    if (legR.current) legR.current.rotation.x = -0.15 - 0.85 * a;
   });
 
   return (
-    <group ref={root} position={[0, 0, 0.2]}>
-      {/* torso */}
+    <group ref={root} position={[0, 0, 0.3]} rotation={[0, Math.PI, 0]}>
       <mesh position={[0, 0.72, 0]} castShadow>
         <capsuleGeometry args={[0.2, 0.34, 6, 14]} />
         <meshStandardMaterial color={kid.shirt} roughness={0.6} />
       </mesh>
-      {/* backpack */}
-      <mesh position={[0, 0.74, -0.24]} castShadow>
-        <boxGeometry args={[0.34, 0.42, 0.16]} />
+      <mesh position={[0, 0.74, -0.25]} castShadow>
+        <boxGeometry args={[0.34, 0.44, 0.16]} />
         <meshStandardMaterial color={BRAND_DARK} roughness={0.7} />
       </mesh>
-      {/* head */}
       <mesh position={[0, 1.18, 0]} castShadow>
         <sphereGeometry args={[0.19, 24, 24]} />
         <meshStandardMaterial color={kid.skin} roughness={0.7} />
       </mesh>
-      <mesh position={[0, 1.24, -0.03]} castShadow>
-        <sphereGeometry args={[0.2, 24, 24, 0, Math.PI * 2, 0, Math.PI * 0.55]} />
+      <mesh position={[0, 1.22, -0.03]} castShadow>
+        <sphereGeometry args={[0.205, 24, 24, 0, Math.PI * 2, 0, Math.PI * 0.62]} />
         <meshStandardMaterial color={kid.hair} roughness={0.9} />
       </mesh>
-      {/* arms */}
       {[
         { ref: armL, x: -0.27 },
         { ref: armR, x: 0.27 },
@@ -104,7 +111,6 @@ function Student({ kid, animate }: { kid: Kid; animate: boolean }) {
           </mesh>
         </group>
       ))}
-      {/* legs */}
       {[
         { ref: legL, x: -0.1 },
         { ref: legR, x: 0.1 },
@@ -122,31 +128,43 @@ function Student({ kid, animate }: { kid: Kid; animate: boolean }) {
 
 function Star({ animate }: { animate: boolean }) {
   const ref = useRef<THREE.Mesh>(null);
+  const geo = useMemo(() => {
+    const shape = new THREE.Shape();
+    const spikes = 5;
+    const outer = 0.4;
+    const inner = 0.18;
+    for (let i = 0; i < spikes * 2; i++) {
+      const r = i % 2 === 0 ? outer : inner;
+      const a = (i / (spikes * 2)) * Math.PI * 2 + Math.PI / 2;
+      const x = Math.cos(a) * r;
+      const y = Math.sin(a) * r;
+      if (i === 0) shape.moveTo(x, y);
+      else shape.lineTo(x, y);
+    }
+    shape.closePath();
+    const g = new THREE.ExtrudeGeometry(shape, { depth: 0.12, bevelEnabled: true, bevelSize: 0.03, bevelThickness: 0.03, bevelSegments: 2 });
+    g.center();
+    return g;
+  }, []);
+
   useFrame(({ clock }) => {
     if (!ref.current) return;
     const c = animate ? clock.getElapsedTime() : 0;
-    ref.current.rotation.y = c * 1.2;
-    ref.current.position.y = LADDER_H + 0.75 + Math.sin(c * 2) * 0.08;
+    ref.current.rotation.y = Math.sin(c * 1.1) * 0.7;
+    ref.current.position.y = LADDER_H + 0.85 + Math.sin(c * 2) * 0.07;
   });
+
   return (
-    <group>
-      <mesh position={[0, LADDER_H + 0.75, 0]}>
-        <sphereGeometry args={[0.5, 24, 24]} />
-        <meshBasicMaterial color="#fde68a" transparent opacity={0.14} toneMapped={false} depthWrite={false} />
-      </mesh>
-      <mesh ref={ref} position={[0, LADDER_H + 0.75, 0]}>
-        <octahedronGeometry args={[0.34, 0]} />
-        <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.8} roughness={0.25} metalness={0.4} />
-      </mesh>
-    </group>
+    <mesh ref={ref} geometry={geo} position={[0, LADDER_H + 0.85, 0]} castShadow>
+      <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.45} roughness={0.3} metalness={0.3} />
+    </mesh>
   );
 }
 
 const CUBES = [
-  { c: "#3965e3", x: -1.45, y: 1.4, z: 0.4, s: 0.34, p: 0 },
-  { c: "#f59e0b", x: 1.45, y: 2.6, z: 0.2, s: 0.28, p: 1.5 },
-  { c: "#10b981", x: -1.3, y: 3.6, z: -0.2, s: 0.26, p: 3 },
-  { c: "#ec4899", x: 1.3, y: 4.3, z: 0.5, s: 0.3, p: 4.5 },
+  { c: "#3965e3", x: -1.45, y: 1.2, z: 0.3, s: 0.26, p: 0 },
+  { c: "#10b981", x: 1.5, y: 1.6, z: 0.2, s: 0.22, p: 2 },
+  { c: "#ec4899", x: -1.3, y: 3.9, z: 0.1, s: 0.22, p: 4 },
 ];
 
 function FloatingCubes({ animate }: { animate: boolean }) {
@@ -156,9 +174,9 @@ function FloatingCubes({ animate }: { animate: boolean }) {
     refs.current.forEach((m, i) => {
       if (!m) return;
       const d = CUBES[i];
-      m.position.y = d.y + Math.sin(c * 1.2 + d.p) * 0.15;
-      m.rotation.x = c * 0.6 + d.p;
-      m.rotation.y = c * 0.8 + d.p;
+      m.position.y = d.y + Math.sin(c * 1.2 + d.p) * 0.12;
+      m.rotation.x = c * 0.5 + d.p;
+      m.rotation.y = c * 0.7 + d.p;
     });
   });
   return (
@@ -175,15 +193,15 @@ function FloatingCubes({ animate }: { animate: boolean }) {
 
 function Books() {
   const stack = [
-    { c: "#3965e3", w: 1.1, y: 0.09 },
-    { c: "#f59e0b", w: 0.95, y: 0.27 },
-    { c: "#10b981", w: 1.0, y: 0.45 },
+    { c: "#3965e3", w: 0.9, y: 0.07 },
+    { c: "#f59e0b", w: 0.78, y: 0.21 },
+    { c: "#10b981", w: 0.82, y: 0.35 },
   ];
   return (
-    <group position={[1.35, 0, 0.7]} rotation={[0, -0.5, 0]}>
+    <group position={[1.15, 0, 0.8]} rotation={[0, -0.5, 0]}>
       {stack.map((b, i) => (
         <mesh key={i} position={[0, b.y, 0]} rotation={[0, i * 0.18, 0]} castShadow>
-          <boxGeometry args={[b.w, 0.16, 0.72]} />
+          <boxGeometry args={[b.w, 0.13, 0.58]} />
           <meshStandardMaterial color={b.c} roughness={0.6} />
         </mesh>
       ))}
@@ -195,9 +213,9 @@ function Scene({ animate }: { animate: boolean }) {
   const group = useRef<THREE.Group>(null);
   useFrame(({ pointer, clock }) => {
     if (!group.current) return;
-    const idle = animate ? Math.sin(clock.getElapsedTime() * 0.4) * 0.12 : 0;
-    const ty = -0.55 + pointer.x * 0.35 + idle;
-    const tx = pointer.y * -0.08;
+    const idle = animate ? Math.sin(clock.getElapsedTime() * 0.4) * 0.1 : 0;
+    const ty = -0.3 + pointer.x * 0.3 + idle;
+    const tx = pointer.y * -0.06;
     group.current.rotation.y += (ty - group.current.rotation.y) * 0.05;
     group.current.rotation.x += (tx - group.current.rotation.x) * 0.05;
   });
@@ -217,8 +235,7 @@ function Scene({ animate }: { animate: boolean }) {
         shadow-camera-far={40}
       />
       <group ref={group} position={[0, -2.3, 0]}>
-        {/* lean the ladder back a touch */}
-        <group rotation={[-0.08, 0, 0]}>
+        <group rotation={[-0.06, 0, 0]}>
           <Ladder />
           {KIDS.map((k) => (
             <Student key={k.shirt} kid={k} animate={animate} />

@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (3D scene cleanup)
+- Reworked 3D hero scene: 2 students now face the ladder and climb rung by rung with hands on rungs (no overlap), real 5-point star, thinner ladder with feet, 3 small cubes, chips moved off the scene (`src/components/ladder-scene.tsx`, `src/components/hero.tsx`)
+
 ### 2026-11-20 (hero 3D resize)
 - Hero scene confined to right 30% (grid 7fr/3fr), rescaled to fit, added floating cubes and glass chips (Live online, In-person), 3 students; headline set to balanced wrap (`src/components/hero.tsx`, `src/components/ladder-scene.tsx`)
 - Removed navbar scroll progress bar (`src/components/navbar.tsx`)
