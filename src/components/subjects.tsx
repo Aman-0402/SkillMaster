@@ -74,20 +74,19 @@ export default function Subjects() {
               <Link
                 href={to}
                 onMouseMove={trackGlow}
-                className="group relative flex h-full min-h-[26rem] flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-brand-400/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 sm:p-11"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors duration-300 hover:border-brand-400/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-400 sm:p-11"
               >
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 [background:radial-gradient(420px_circle_at_var(--mx,50%)_var(--my,50%),rgb(57_101_227/0.28),transparent_60%)] group-hover:opacity-100"
                 />
-                <div className="relative flex items-center justify-end">
-                  <span className="flex size-14 items-center justify-center rounded-full border border-white/25 text-white transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-black sm:size-16">
-                    <ArrowUpRight className="size-7 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-                  </span>
-                </div>
-
-                <div className="relative mt-16">
-                  <h3 className="text-5xl font-extrabold tracking-tight sm:text-7xl">{title}</h3>
+                <div className="relative">
+                  <div className="flex items-center justify-between gap-4">
+                    <h3 className="text-5xl font-extrabold tracking-tight sm:text-7xl">{title}</h3>
+                    <span className="flex size-14 items-center justify-center rounded-full border border-white/25 text-white transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-black sm:size-16">
+                      <ArrowUpRight className="size-7 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
+                    </span>
+                  </div>
                   <p className="mt-4 max-w-lg text-xl leading-snug text-white/65 sm:text-2xl">{desc}</p>
                   <div className="mt-8 flex flex-wrap items-center gap-3">
                     {tags.map((t) => (

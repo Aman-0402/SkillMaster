@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (subjects spacing)
+- Subjects cards: removed empty top row and min-height; arrow button now sits on the title row (`src/components/subjects.tsx`)
+
 ### 2026-11-20 (subjects index removed)
 - Removed "01" index label and line from Subjects cards (`src/components/subjects.tsx`)
 
