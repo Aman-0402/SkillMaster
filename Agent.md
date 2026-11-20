@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (hero card removed)
+- Removed the "Your week" card from the hero; hero content is now centered in one column with restored vertical padding (`src/components/hero.tsx`)
+
 ### 2026-11-20 (hero tighter, tag removed)
 - Tightened hero spacing further (desktop padding 1.5rem, smaller gaps) and removed the "Live online and in-person classes" tag above the headline (`src/components/hero.tsx`)
 
