@@ -10,12 +10,16 @@ import {
 import clsx from "clsx";
 import {
   ArrowRight,
+  BarChart3,
+  Brain,
   Briefcase,
   Building2,
   ChevronDown,
   HelpCircle,
   LogIn,
   Menu,
+  Monitor,
+  Server,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -24,6 +28,16 @@ type NavItem = { title: string; desc: string; to: string; Icon: LucideIcon };
 type NavGroup = { key: string; label: string; items: NavItem[] };
 
 const GROUPS: NavGroup[] = [
+  {
+    key: "courses",
+    label: "Courses",
+    items: [
+      { title: "Frontend", desc: "HTML, CSS, JavaScript and React", to: "/courses/frontend", Icon: Monitor },
+      { title: "Backend", desc: "APIs, databases and server-side code", to: "/courses/backend", Icon: Server },
+      { title: "Data Analyst", desc: "Excel, SQL, Python and dashboards", to: "/courses/data-analyst", Icon: BarChart3 },
+      { title: "AI", desc: "Machine learning and generative AI", to: "/courses/ai", Icon: Brain },
+    ],
+  },
   {
     key: "about",
     label: "About",
@@ -38,7 +52,7 @@ const GROUPS: NavGroup[] = [
 type TopEntry = { type: "link"; label: string; to: string } | { type: "group"; key: string };
 
 const TOP: TopEntry[] = [
-  { type: "link", label: "Courses", to: "/courses" },
+  { type: "group", key: "courses" },
   { type: "link", label: "Instructors", to: "/instructors" },
   { type: "link", label: "Blog", to: "/blog" },
   { type: "group", key: "about" },
@@ -46,6 +60,13 @@ const TOP: TopEntry[] = [
 ];
 
 const PROMO: Record<string, { eyebrow: string; title: string; text: string; to: string; cta: string }> = {
+  courses: {
+    eyebrow: "Learn at your pace",
+    title: "Pick a track and start building",
+    text: "Frontend, Backend, Data Analyst and AI courses in one place.",
+    to: "/courses",
+    cta: "Browse all courses",
+  },
   about: {
     eyebrow: "Who we are",
     title: "Learn from people who do the work",

@@ -31,6 +31,9 @@ Format, newest first:
 
 ## Updates
 
+### 2026-11-20 (courses dropdown)
+- Courses is now a dropdown: Frontend, Backend, Data Analyst, AI (`/courses/frontend`, `/courses/backend`, `/courses/data-analyst`, `/courses/ai`), with a promo card (`src/components/navbar.tsx`)
+
 ### 2026-11-20 (navbar names)
 - Renamed navbar sections to the screenshot names: Courses, Instructors, Blog (plain links), About (dropdown: About us, Portfolio, FAQ), Contact. Removed Services/Company/Careers/Resources groups. Mobile menu gets an Explore section (`src/components/navbar.tsx`, `src/App.tsx`)
 
